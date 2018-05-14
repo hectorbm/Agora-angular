@@ -1,0 +1,43 @@
+<div class="contentSpacing">
+  <div class="row" *ngIf="project!=null">
+    <div class="col-md-10">
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <small>{{project.publishedAt }}</small>
+          </div>
+          <p class="mb-1">{{project.extract }}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-1"> Fecha:<p>
+              <small >{{project.day }}</small>
+              <small>{{project.month }}</small>
+              <small>{{project.year }}</small>
+            </div>
+            <div class="col-md-6">
+              <small>{{project.favor }}</small>
+              <small>{{project.against  }}</small>
+              <small>{{project.tags   }}</small>
+              <small>{{project._id  }}</small>
+              <small>{{project.caseFile  }}</small>
+              <small>{{project.startedAt  }}</small>
+              <small>{{project.date  }}</small>
+              <small>{{project.__v  }}</small>
+
+            </div>
+          </div>
+
+
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+          <button type="button" class="btn my-1 btn-outline-success btn-block">Favor</button>
+      </div>
+      <div class="row">
+        <button type="button" class="btn my-1 btn-outline-danger btn-block">Against</button>
+      </div>
+    </div>
+  </div>
+</div>

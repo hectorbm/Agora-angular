@@ -1,0 +1,49 @@
+<div class="container ">
+  <div class="row contentSpacing">
+    <div class="col-md-12">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Falta hacer!!!" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+  </div>
+<div class="contentSpacing" *ngFor="let project of projects">
+  <div class="row"  >
+    <div class="col-md-10">
+      <div class="list-group">
+        <a  class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <small>{{project.publishedAt}}</small>
+          </div>
+          <p class="mb-1">{{project.extract}}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-1"> Fecha:<p>
+              <small>{{project.day }}</small>
+              <small>{{project.month }}</small>
+              <small>{{project.year }}</small>
+            </div>
+            <div class="col-md-6">
+              <small>Id: {{project._id }}</small>
+              <small>Favor:{{project.favor}}</small>
+              <small>Against{{project.against}}</small>
+              <small>Tags:{{project.tags}}</small>
+              <small>CaseFile:{{project.caseFile}}</small>
+              <small>StartedAt:{{project.startedAt}}</small>
+              <small>Date:{{project.date}}</small>
+              <small>__v:{{project.__v}}</small>
+            </div>
+          </div>
+
+
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">
+
+          <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-success btn-block">See More</button>
+
+    </div>
+  </div>
+</div>
+</div>
