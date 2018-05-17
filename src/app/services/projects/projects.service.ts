@@ -2,31 +2,28 @@ import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 /*Interfaces*/
 import { Project } from '../../modules/interfaces/project.interface';
-/*HttpReqResModules*/
-import { Http, Response} from '@angular/http';
+/*Observables para los HttpRequest*/
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+/*HttpClient para los Request*/
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProjectsService {
 
   readonly projectsUrl ='https://glacial-refuge-10252.herokuapp.com/projects';
 
-  constructor(private http:Http) {
+  constructor(private http:HttpClient) {
   }
 
 
   getById(id:string):Observable<Project>{
     return this.http
-                    .get(this.projectsUrl + "/" + id)
-                    .map( (response:Response)=> <Project>response.json());
+                    .get<Project>(this.projectsUrl + "/" + id);
   }
   getAllprojects():Observable<Project[]>{
 
     return this.http
-                    .get(this.projectsUrl)
-                    .map( (response:Response)=> <Project[]>response.json());
-
+                    .get<Project[]>(this.projectsUrl);
   }
 
 

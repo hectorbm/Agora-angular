@@ -15,23 +15,26 @@
           <div class="d-flex w-100 justify-content-between">
             <small>{{project.publishedAt}}</small>
           </div>
+          <small>Project Description:</small>
           <p class="mb-1">{{project.extract}}</p>
           <div class="row">
-            <div class="col-md-6">
-              <p class="mb-1"> Fecha:<p>
-              <small>{{project.day }}</small>
-              <small>{{project.month }}</small>
-              <small>{{project.year }}</small>
+            <div class="col-md-4">
+              <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <small>Votos:</small>
+              <br>
+              <small>Favor: {{project.favor}}</small>
+              <br>
+              <small>Against: {{project.against}}</small>
+            </div>
+            <div class="col-md-4">
               <small>Id: {{project._id }}</small>
-              <small>Favor:{{project.favor}}</small>
-              <small>Against{{project.against}}</small>
-              <small>Tags:{{project.tags}}</small>
-              <small>CaseFile:{{project.caseFile}}</small>
-              <small>StartedAt:{{project.startedAt}}</small>
-              <small>Date:{{project.date}}</small>
-              <small>__v:{{project.__v}}</small>
+
+              <br>
+              <small>CaseFile: {{project.caseFile}}</small>
+              <br>
+              <small>StartedAt: {{project.startedAt}}</small>
             </div>
           </div>
 
@@ -41,7 +44,7 @@
     </div>
     <div class="col-md-2">
 
-          <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-success btn-block">See More</button>
+          <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-primary btn-block">Vote</button>
 
     </div>
   </div>

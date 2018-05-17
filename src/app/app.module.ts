@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 /*HttpReqResModules*/
-import {HttpModule} from '@angular/http';
-
-
+import { HttpClientModule } from '@angular/common/http';
 /*Routes*/
 import { APP_ROUTING } from "./app.routes";
 
@@ -22,6 +20,7 @@ import { ProjectsService } from './services/projects/projects.service';
 import { SignupService } from './services/user/signUp/signup.service';
 import { LoginService } from './services/user/login/login.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +33,8 @@ import { LoginService } from './services/user/login/login.service';
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING,
-    HttpModule
+    HttpClientModule,
+    APP_ROUTING
   ],
   providers: [
     ProjectsService,

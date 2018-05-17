@@ -6,24 +6,26 @@
           <div class="d-flex w-100 justify-content-between">
             <small>{{project.publishedAt }}</small>
           </div>
+          <small>Project Description:</small>
           <p class="mb-1">{{project.extract }}</p>
           <div class="row">
-            <div class="col-md-6">
-              <p class="mb-1"> Fecha:<p>
-              <small >{{project.day }}</small>
-              <small>{{project.month }}</small>
-              <small>{{project.year }}</small>
+            <div class="col-md-4">
+              <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
             </div>
-            <div class="col-md-6">
-              <small>{{project.favor }}</small>
-              <small>{{project.against  }}</small>
-              <small>{{project.tags   }}</small>
-              <small>{{project._id  }}</small>
-              <small>{{project.caseFile  }}</small>
-              <small>{{project.startedAt  }}</small>
-              <small>{{project.date  }}</small>
-              <small>{{project.__v  }}</small>
+            <div class="col-md-4">
+              <small>Votos:</small>
+              <br>
+              <small>Favor: {{project.favor}}</small>
+              <br>
+              <small>Against: {{project.against}}</small>
+            </div>
+            <div class="col-md-4">
+              <small>Id: {{project._id }}</small>
 
+              <br>
+              <small>CaseFile: {{project.caseFile}}</small>
+              <br>
+              <small>StartedAt: {{project.startedAt}}</small>
             </div>
           </div>
 
@@ -33,10 +35,10 @@
     </div>
     <div class="col-md-2">
       <div class="row">
-          <button type="button" class="btn my-1 btn-outline-success btn-block">Favor</button>
+          <button type="button" class="btn my-2 btn-outline-success btn-block">Favor</button>
       </div>
       <div class="row">
-        <button type="button" class="btn my-1 btn-outline-danger btn-block">Against</button>
+        <button type="button" class="btn my-2 btn-outline-danger btn-block">Against</button>
       </div>
     </div>
   </div>
