@@ -19,8 +19,8 @@ import { ProjectsComponent } from './modules/projects/projects.component';
 import { ProjectComponent } from './modules/projects/project/project.component';
 /*Services import*/
 import { ProjectsService } from './services/projects/projects.service';
-
-
+import { SignupService } from './services/user/signUp/signup.service';
+import { LoginService } from './services/user/login/login.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,9 @@ import { ProjectsService } from './services/projects/projects.service';
     HttpModule
   ],
   providers: [
-    ProjectsService
+    ProjectsService,
+    SignupService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })
