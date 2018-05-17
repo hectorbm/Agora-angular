@@ -9,7 +9,7 @@ import { ProjectsService } from '../../services/projects/projects.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  readonly allProjectsUrl ='https://glacial-refuge-10252.herokuapp.com/projects/5af11057f7cb6970e9dfefaa';
+  
   projects:Project[];
   constructor(private projectsService:ProjectsService) {
     this.getAllprojects();
