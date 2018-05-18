@@ -10,7 +10,7 @@ import { ProjectsService } from '../../../services/projects/projects.service';
 })
 
 export class ProjectComponent implements OnInit {
-
+  errorStatus404:boolean=false;
   id:string;
   project:Project;
   constructor(private activatedRoute:ActivatedRoute,private projectsService:ProjectsService) {
@@ -26,8 +26,13 @@ export class ProjectComponent implements OnInit {
   }
 
   getProject(id:string){
-    this.projectsService.getById(id).subscribe( response => this.project = response
-    );
+    this.projectsService.getById(id).subscribe( response => {
+      this.project = response;
+    }, error => {
+      if (error.status == 404){
+        this.errorStatus404=true;
+      }
+    });
 
   }
 
