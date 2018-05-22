@@ -1,10 +1,7 @@
 <div class="container ">
   <div class="row contentSpacing">
     <div class="col-md-12">
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Falta hacer!!!" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
     </div>
   </div>
 <div class="contentSpacing" *ngFor="let project of projects">
@@ -47,6 +44,13 @@
           <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-primary btn-block">Vote</button>
 
     </div>
+  </div>
+</div>
+<div class="contentSpacing" *ngIf="errorStatus404">
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Projects Not Found</h4>
+    <p>Error 404-Not Found</p>
+    <hr>
   </div>
 </div>
 </div>

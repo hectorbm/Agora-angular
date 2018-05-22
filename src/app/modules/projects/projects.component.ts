@@ -9,7 +9,7 @@ import { ProjectsService } from '../../services/projects/projects.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  
+  errorStatus404:boolean=false;
   projects:Project[];
   constructor(private projectsService:ProjectsService) {
     this.getAllprojects();
@@ -19,7 +19,13 @@ export class ProjectsComponent implements OnInit {
 
   }
   getAllprojects(){
-    this.projectsService.getAllprojects().subscribe( response => this.projects = response );
+    this.projectsService.getAllprojects().subscribe( response =>{
+      this.projects = response;
+    }, error =>{
+      if (error.status == 404 ){
+        this.errorStatus404=true;
+      }
+    } );
   }
 
 

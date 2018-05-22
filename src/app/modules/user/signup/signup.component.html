@@ -1,9 +1,16 @@
 <div class="container contentSpacing">
-  <div class="row">
-    <div class="col-md-3">
+  <div class="alert alert-success" *ngIf="succesfulSignUp" role="alert">
+    <p class="text-center mb1">Registro Exitoso</p>
+  </div>
+  <div class="alert alert-danger" *ngIf="errorOnSignUp" role="alert">
+    Hubo un error en su registro. <a  class="alert-link">Verificar los datos ingresados!</a>
+  </div>
+
+  <div class="row" *ngIf="!succesfulSignUp">
+    <div class="col-md-2">
     </div>
-    <div class="col-md-6">
-      <form>
+    <div class="col-md-8">
+      <form >
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
           <div class="col-sm-10">
@@ -43,12 +50,12 @@
 
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary" (click)="signUpMyUser()">Sign Up</button>
           </div>
         </div>
       </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
     </div>
   </div>
 </div>

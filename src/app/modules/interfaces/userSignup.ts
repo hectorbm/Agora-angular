@@ -3,6 +3,6 @@ export interface UserSignUp{
   password:string,
   firstName:string,
   middleName:string,
-  lastname:string,
+  lastName:string,
   idNumber:number
 }

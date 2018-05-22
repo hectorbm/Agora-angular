@@ -12,5 +12,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  isAuthenticated():boolean{
+    return false;
+  }
 
 }
