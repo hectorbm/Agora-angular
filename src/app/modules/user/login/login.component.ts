@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.errorOnLogin=false;
     this.loginService.loginMyUser().subscribe(response=>{
             console.log(response.headers.keys());
+            console.log(response.headers.get("X-Auth")
             this.succesfulLogin=true;
             this.router.navigate(['home']);
           },error=>{
