@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 
 /*HttpReqResModules*/
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 /*Routes*/
 import { APP_ROUTING } from "./app.routes";
 
@@ -20,6 +21,10 @@ import { ProjectsService } from './services/projects/projects.service';
 import { SignupService } from './services/user/signUp/signup.service';
 import { LoginService } from './services/user/login/login.service';
 
+/*Graficos*/
+import {ChartsModule} from 'ng2-charts';
+import { MeComponent } from './modules/user/me/me.component';
+
 
 @NgModule({
   declarations: [
@@ -29,12 +34,15 @@ import { LoginService } from './services/user/login/login.service';
     NavbarComponent,
     HomeComponent,
     ProjectsComponent,
-    ProjectComponent
+    ProjectComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    APP_ROUTING
+    HttpModule,
+    APP_ROUTING,
+    ChartsModule
   ],
   providers: [
     ProjectsService,

@@ -1,8 +1,8 @@
-<div class="contentSpacing">
-  <div class="row" *ngIf="project!=null">
+<div class="contentSpacing"  *ngIf="project!=null">
+  <div class="row my-5">
     <div class="col-md-10">
       <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <small>{{project.publishedAt }}</small>
           </div>
@@ -11,6 +11,9 @@
           <div class="row">
             <div class="col-md-4">
               <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
+              <br>
+              <small>CaseFile: {{project.caseFile}}</small>
+              <br>
             </div>
             <div class="col-md-4">
               <small>Votos:</small>
@@ -20,10 +23,6 @@
               <small>Against: {{project.against}}</small>
             </div>
             <div class="col-md-4">
-              <small>Id: {{project._id }}</small>
-
-              <br>
-              <small>CaseFile: {{project.caseFile}}</small>
               <br>
               <small>StartedAt: {{project.startedAt}}</small>
             </div>
@@ -33,7 +32,7 @@
         </a>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 ">
       <div class="row">
           <button type="button" class="btn my-2 btn-outline-success btn-block">Favor</button>
       </div>
@@ -41,13 +40,37 @@
         <button type="button" class="btn my-2 btn-outline-danger btn-block">Against</button>
       </div>
     </div>
+
   </div>
+  <div class="row my-3">
+    <div class="col-md-5">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action flex-column align-items-start">
+        <h6>Statistics</h6>
+        <hr>
+        <div style="display: block" *ngIf="!(project.favor==0 && project.against==0)" >
+            <canvas baseChart
+                        [data]="doughnutChartData"
+                        [labels]="doughnutChartLabels"
+                        [chartType]="doughnutChartType"
+                        >
+            </canvas>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p>No information available</p>
+          </div>
+        </div>
+
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
 <div  class="contentSpacing" *ngIf="errorStatus404">
   <div class="alert alert-danger" role="alert">
     <p class="mb-1 text-center">Project Not Found!</p>
   </div>
-</div>
-
-
-
 </div>

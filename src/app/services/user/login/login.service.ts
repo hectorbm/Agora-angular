@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserLogin } from '../../../modules/interfaces/userLogin';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-
-
+import { HttpHeaders, HttpClient, HttpResponse} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class LoginService {
 
@@ -12,25 +11,18 @@ export class LoginService {
  }
 readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-  loginMyUser(user:UserLogin){
+  loginMyUser():Observable<HttpResponse<Object>>{
+        let body = JSON.stringify(this.usuarioprueba);
         let headers = new HttpHeaders({
-        
-        'Authorization':'',
-        'Content-Type': 'application/json'
-
+        'Content-Type': 'application/json',
+          'X-Auth':''
       });
 
-        this.httpClient.post(this.loginUrl,this.usuarioprueba,{headers, observe:'response'}).subscribe(response=>{
-
-          console.log(response.headers.keys());
-
-
-        },error=>{
-          console.log(error);
-        });
+        return this.http.post<HttpResponse <Object> >(this.loginUrl,body,{headers,observe:'response'});
   }
+
 
 
 }

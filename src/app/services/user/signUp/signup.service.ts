@@ -1,42 +1,33 @@
 import { Injectable } from '@angular/core';
 import { UserSignUp } from '../../../modules/interfaces/userSignup';
-import {HttpClient,HttpHeaders } from '@angular/common/http';
-
-
+import { HttpHeaders, HttpClient, HttpResponse} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class SignupService {
 
-  statusOk:boolean=false;
     usuarioprueba:UserSignUp={
-     "email":"hector2@hotmail.com",
+     "email":"hector2222@hotmail.com",
      "password":"johndoe1234",
-     "firstName":"john",
-     "middleName":"carrot",
-     "lastName":"goodmaison",
-     "idNumber":14512109
+     "firstName":"johnd",
+     "middleName":"carrotd",
+     "lastName":"goodmaisond",
+     "idNumber":14512110
   };
+
   readonly signUpUrl = "https://glacial-refuge-10252.herokuapp.com/users";
-  constructor(private httpClient:HttpClient) {
-  }
 
-    signUpUser(user:UserSignUp):boolean{
+    constructor(private http:HttpClient) {
+    }
 
-      const headers = new HttpHeaders({
+    signUpUser():Observable<HttpResponse<Object>>{
+
+      let body = JSON.stringify(this.usuarioprueba);
+      let headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization':''
+      'x-auth':''
     });
 
-      this.httpClient.post(this.signUpUrl,this.usuarioprueba, { headers , observe:'response'}).subscribe(response=>{
-        this.statusOk = true;
-        console.log(response);
-
-      },error=>{
-        this.statusOk = false;
-        console.log(error);
-      });
-
-
-
-      return this.statusOk;
+    return this.http.post<HttpResponse<Object>>(this.signUpUrl,body,{observe:'response'});
     }
+
   }

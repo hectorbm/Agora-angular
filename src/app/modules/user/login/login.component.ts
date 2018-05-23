@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../../interfaces/userLogin';
 import { LoginService } from '../../../services/user/login/login.service';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,14 +11,26 @@ import { LoginService } from '../../../services/user/login/login.service';
 export class LoginComponent implements OnInit {
 
   user:UserLogin;
+  errorOnLogin: boolean=false;
+  succesfulLogin:boolean=false;
 
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService,private router:Router) { }
 
   ngOnInit() {
   }
 
   toLogin(){
-    this.loginService.loginMyUser(this.user);
+    this.succesfulLogin=false;
+    this.errorOnLogin=false;
+    this.loginService.loginMyUser().subscribe(response=>{
+            console.log(response.headers.keys());
+            this.succesfulLogin=true;
+            this.router.navigate(['home']);
+          },error=>{
+            console.log(error);
+            this.succesfulLogin=false;
+            this.errorOnLogin=true;
+          });
   }
 
 

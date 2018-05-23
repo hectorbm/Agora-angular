@@ -8,11 +8,9 @@ import { SignupService } from '../../../services/user/signUp/signup.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
-  user:UserSignUp;
+  errorOnSignUp: boolean=false;
   succesfulSignUp:boolean=false;
-  errorOnSignUp:boolean=false;
-
+  user:UserSignUp;
   constructor(private signUpService:SignupService) { }
 
   ngOnInit() {
@@ -21,12 +19,15 @@ export class SignupComponent implements OnInit {
   signUpMyUser(){
     this.succesfulSignUp=false;
     this.errorOnSignUp=false;
-    if (this.signUpService.signUpUser(this.user)){
+    this.signUpService.signUpUser().subscribe(response=>{
+      console.log(response.headers.keys());
       this.succesfulSignUp=true;
-    }
-    else{
+
+    },error=>{
+      console.log(error);
+      this.succesfulSignUp=false;
       this.errorOnSignUp=true;
-    }
+    });
   }
 
 }
