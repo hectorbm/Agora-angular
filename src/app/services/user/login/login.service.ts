@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 export class LoginService {
 
   usuarioprueba:UserLogin={
-   "email":"hector@hotmail.com",
+   "email":"hector2222@hotmail.com",
    "password":"johndoe1234"
  }
 readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
@@ -16,13 +16,9 @@ readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
   loginMyUser():Observable<HttpResponse<Object>>{
         let body = JSON.stringify(this.usuarioprueba);
         let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-          'X-Auth':''
+        'Content-Type': 'application/json'
       });
-
         return this.http.post<HttpResponse <Object> >(this.loginUrl,body,{headers,observe:'response'});
   }
-
-
 
 }

@@ -10,6 +10,7 @@ import { SignupService } from '../../../services/user/signUp/signup.service';
 export class SignupComponent implements OnInit {
   errorOnSignUp: boolean=false;
   succesfulSignUp:boolean=false;
+  onSignUp:boolean=false;
   user:UserSignUp;
   constructor(private signUpService:SignupService) { }
 
@@ -17,16 +18,18 @@ export class SignupComponent implements OnInit {
   }
 
   signUpMyUser(){
+    this.onSignUp = true;
     this.succesfulSignUp=false;
     this.errorOnSignUp=false;
     this.signUpService.signUpUser().subscribe(response=>{
-      console.log(response.headers.keys());
+      localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
       this.succesfulSignUp=true;
 
     },error=>{
       console.log(error);
       this.succesfulSignUp=false;
       this.errorOnSignUp=true;
+      this.onSignUp=false;
     });
   }
 

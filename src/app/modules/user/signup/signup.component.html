@@ -50,7 +50,7 @@
 
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary" (click)="signUpMyUser()">Sign Up</button>
+            <button type="submit" class="btn btn-primary" *ngIf="!onSignUp" (click)="signUpMyUser()">Sign Up</button>
           </div>
         </div>
       </form>

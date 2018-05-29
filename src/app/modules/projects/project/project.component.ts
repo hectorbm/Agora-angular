@@ -44,4 +44,11 @@ export class ProjectComponent implements OnInit {
 
   }
 
+  voteProjectFavor(){
+    this.projectsService.vote(this.id,"favor");
+  }
+
+    voteProjectAgainst(){
+      this.projectsService.vote(this.id,"against");
+    }
 }

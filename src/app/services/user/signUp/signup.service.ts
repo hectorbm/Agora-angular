@@ -23,11 +23,10 @@ export class SignupService {
 
       let body = JSON.stringify(this.usuarioprueba);
       let headers = new Headers({
-      'Content-Type': 'application/json',
-      'x-auth':''
+      'Content-Type': 'application/json'
     });
 
-    return this.http.post<HttpResponse<Object>>(this.signUpUrl,body,{observe:'response'});
+    return this.http.post<HttpResponse<Object>>(this.signUpUrl,this.usuarioprueba,{observe:'response'});
     }
 
   }
