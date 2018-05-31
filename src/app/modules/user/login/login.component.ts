@@ -14,7 +14,9 @@ export class LoginComponent implements OnInit {
   errorOnLogin: boolean=false;
   succesfulLogin:boolean=false;
   onLogin:boolean=false;
-  constructor(private isAuthenticatedService:IsAuthenticatedService,private loginService:LoginService,private router:Router) { }
+  constructor(private isAuthenticatedService:IsAuthenticatedService,private loginService:LoginService,private router:Router) {
+    this.user = new UserLogin();
+  }
 
   ngOnInit() {
   }
@@ -23,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.onLogin=true;
     this.succesfulLogin=false;
     this.errorOnLogin=false;
-    this.loginService.loginMyUser().subscribe(response=>{
+    this.loginService.loginMyUser(this.user).subscribe(response=>{
 
             localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
             this.succesfulLogin=true;

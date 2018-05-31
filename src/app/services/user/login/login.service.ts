@@ -5,20 +5,16 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class LoginService {
 
-  usuarioprueba:UserLogin={
-   "email":"hector2222@hotmail.com",
-   "password":"johndoe1234"
- }
+
 readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
 
   constructor(private http:HttpClient) { }
 
-  loginMyUser():Observable<HttpResponse<Object>>{
-        let body = JSON.stringify(this.usuarioprueba);
+  loginMyUser(user:UserLogin):Observable<HttpResponse<Object>>{
         let headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });
-        return this.http.post<HttpResponse <Object> >(this.loginUrl,body,{headers,observe:'response'});
+        return this.http.post<HttpResponse <Object> >(this.loginUrl,user,{headers,observe:'response'});
   }
 
 }

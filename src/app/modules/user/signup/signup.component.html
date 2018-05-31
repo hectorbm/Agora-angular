@@ -14,37 +14,37 @@
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">First Name</label>
           <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputFirstName" placeholder="Name" required>
+            <input type="name" class="form-control" name="inputFirstName" [(ngModel)]="user.firstName" placeholder="Name" required>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Middle Name</label>
           <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputMiddleName" placeholder="Name" >
+            <input type="name" class="form-control" name="inputMiddleName" [(ngModel)]="user.middleName" placeholder="Middle Name" >
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Last Name</label>
           <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputLastName" placeholder="Last Name" required>
+            <input type="name" class="form-control" name="inputLastName" [(ngModel)]="user.lastName" placeholder="Last Name" required>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Id</label>
           <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputId" placeholder="Id" required>
+            <input type="name" class="form-control" name="inputId" placeholder="Id" [(ngModel)]="user.idNumber" required>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+            <input type="email" class="form-control" name="inputEmail" [(ngModel)]="user.email" placeholder="Email" required>
           </div>
         </div>
         <div class="form-group row">
           <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
           <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+            <input type="password" class="form-control" name="inputPassword" placeholder="Password" [(ngModel)]="user.password" required>
           </div>
         </div>
 

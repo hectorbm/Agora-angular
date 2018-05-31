@@ -12,25 +12,29 @@ export class SignupComponent implements OnInit {
   succesfulSignUp:boolean=false;
   onSignUp:boolean=false;
   user:UserSignUp;
-  constructor(private signUpService:SignupService) { }
+  constructor(private signUpService:SignupService) {
+      this.user = new UserSignUp();
+   }
 
   ngOnInit() {
   }
 
   signUpMyUser(){
-    this.onSignUp = true;
-    this.succesfulSignUp=false;
-    this.errorOnSignUp=false;
-    this.signUpService.signUpUser().subscribe(response=>{
-      localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
-      this.succesfulSignUp=true;
 
-    },error=>{
-      console.log(error);
+      this.onSignUp = true;
       this.succesfulSignUp=false;
-      this.errorOnSignUp=true;
-      this.onSignUp=false;
-    });
+      this.errorOnSignUp=false;
+
+      this.signUpService.signUpUser(this.user).subscribe(response=>{
+        localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
+        this.succesfulSignUp=true;
+
+      },error=>{
+        this.succesfulSignUp=false;
+        this.errorOnSignUp=true;
+        this.onSignUp=false;
+      });
+
   }
 
 }

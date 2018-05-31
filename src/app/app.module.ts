@@ -1,7 +1,7 @@
 /*Default Modules*/
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 /*HttpReqResModules*/
 import { HttpClientModule } from '@angular/common/http';
 
@@ -41,7 +41,7 @@ import {ChartsModule} from 'ng2-charts';
   imports: [
     BrowserModule,
     HttpClientModule,
-
+    FormsModule,
     APP_ROUTING,
     ChartsModule
   ],
