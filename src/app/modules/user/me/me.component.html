@@ -1,6 +1,5 @@
 <div class="container contentSpacing">
   <div class="row" *ngIf="isAuthenticated()">
-
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
@@ -9,20 +8,67 @@
         <hr>
         <br>
         <ul>
-          <li><p>Name </p><p></p></li>
-          <li><p>Middle Name </p><p></p></li>
-          <li><p>Last Name </p><p></p></li>
-          <li>Email:<p></p><p></p></li>
-          <li>Id <p></p><p></p></li>
+          <li><p>Name:  {{user.firstName}}</p></li>
+          <li><p>Middle Name:  {{user.middleName}}</p></li>
+          <li><p>Last Name:  {{user.lastName}}</p></li>
+          <li><p>Email:  {{user.email}}</p></li>
+          <li><p>Id:  {{user.idNumber}}</p></li>
         </ul>
 
-        <button class="btn btn-outline-info ml-3" (click)="toMyVotes()">Ver mis Votos</button>
       </a>
       </div>
+      <div class="col-md-2">
+      </div>
+    <div class="row my-5">
+    <div class="col-md-12">
 
-    <div class="col-md-2">
+      <!--Show user Votes -->
+        <div class="row " *ngIf="myProjects!=null && isAuthenticated()">
+          <div class="col-md-12">
+            <a  class="list-group-item list-group-item-action flex-column align-items-start">
+            <h4>My Votes</h4>
+
+          </a>
+          </div>
+          <div class="col-md-12" *ngFor="let project of myProjects">
+              <div class="list-group my-2">
+                <a  class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <small>{{project.publishedAt}}</small>
+                  </div>
+                  <small>Project Description:</small>
+                  <p class="mb-1">{{project.extract}}</p>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
+                      <br>
+                      <small>CaseFile: {{project.caseFile}}</small>
+                      <br>
+                    </div>
+                    <div class="col-md-4">
+                      <small>Votos:</small>
+                      <br>
+                      <small>Favor: {{project.favor}}</small>
+                      <br>
+                      <small>Against: {{project.against}}</small>
+                    </div>
+                    <div class="col-md-4">
+                      <br>
+
+                      <small>StartedAt: {{project.startedAt}}</small>
+                    </div>
+                  </div>
+
+
+                </a>
+              </div>
+          </div>
+        </div>
+      <!--End user Votes -->
     </div>
   </div>
+  </div>
+
   <div class="row my-5" *ngIf="!isAuthenticated()">
     <div class="col-md-12">
       <div class="alert alert-danger" role="alert">

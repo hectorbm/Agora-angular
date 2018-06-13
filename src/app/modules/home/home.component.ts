@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {IsAuthenticatedService}  from '../../services/user/authenticated/authenticated';
+import {UserService}  from '../../services/user/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,13 +7,13 @@ import {IsAuthenticatedService}  from '../../services/user/authenticated/authent
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private isAuthenticatedService:IsAuthenticatedService) { }
+  constructor(private userService:UserService) { }
 
   ngOnInit() {
   }
 
   isAuthenticated():boolean{
-    return this.isAuthenticatedService.isAuthenticated();
+    return this.userService.isAuthenticated();
   }
 
 }

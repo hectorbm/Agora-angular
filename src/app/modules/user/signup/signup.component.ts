@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserSignUp } from '../../interfaces/userSignup';
-import { SignupService } from '../../../services/user/signUp/signup.service';
+import { UserSignUp } from '../../DataInterfaces/user.interface';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +12,7 @@ export class SignupComponent implements OnInit {
   succesfulSignUp:boolean=false;
   onSignUp:boolean=false;
   user:UserSignUp;
-  constructor(private signUpService:SignupService) {
+  constructor(private userService:UserService) {
       this.user = new UserSignUp();
    }
 
@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
       this.succesfulSignUp=false;
       this.errorOnSignUp=false;
 
-      this.signUpService.signUpUser(this.user).subscribe(response=>{
+      this.userService.signUpUser(this.user).subscribe(response=>{
         localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
         this.succesfulSignUp=true;
 

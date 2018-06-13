@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {UserMe} from '../../interfaces/me.interface';
+import {UserData} from '../../DataInterfaces/user.interface';
+import{Project} from '../../DataInterfaces/project.interface'
 import {Router} from '@angular/router';
-
+import {UserService} from '../../../services/user/user.service';
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
@@ -9,9 +10,11 @@ import {Router} from '@angular/router';
 })
 export class MeComponent implements OnInit {
 
-  user:UserMe;
-
-  constructor(private router:Router) { }
+  user:UserData={lastName :"buena maizon",email:"hectorbuenamaizon@gmail.com",firstName:"hector",middleName:"gabriel",idNumber:39286107};
+  myProjects:any;
+  constructor(private router:Router,private userService:UserService) {
+    this.toMyVotes();
+  }
 
   ngOnInit() {
   }
@@ -21,7 +24,13 @@ export class MeComponent implements OnInit {
     return true;
   }
   toMyVotes(){
-    this.router.navigate(['home']);
+    this.userService.getMyVotes().subscribe(response=>{
+
+      this.myProjects = response;
+
+    },error=>{
+      console.log(error);
+    });
   }
 
 }

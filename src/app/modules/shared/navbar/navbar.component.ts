@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IsAuthenticatedService } from '../../../services/user/authenticated/authenticated';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +9,16 @@ import { IsAuthenticatedService } from '../../../services/user/authenticated/aut
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private isAuthenticatedService:IsAuthenticatedService,private router:Router) { }
+  constructor(private userService:UserService,private router:Router) { }
 
   ngOnInit() {
   }
 
   isAuthenticated():boolean{
-    return this.isAuthenticatedService.isAuthenticated();
+    return this.userService.isAuthenticated();
   }
   toLogout(){
-    this.isAuthenticatedService.logoutMyUser();
+    this.userService.logoutMyUser();
   }
 
 }

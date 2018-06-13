@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLogin } from '../../interfaces/userLogin';
-import { LoginService } from '../../../services/user/login/login.service';
+import { UserLogin } from '../../DataInterfaces/user.interface';
+import { UserService} from '../../../services/user/user.service';
 import {Router} from '@angular/router';
-import {IsAuthenticatedService} from '../../../services/user/authenticated/authenticated';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   errorOnLogin: boolean=false;
   succesfulLogin:boolean=false;
   onLogin:boolean=false;
-  constructor(private isAuthenticatedService:IsAuthenticatedService,private loginService:LoginService,private router:Router) {
+  constructor(private userService:UserService,private router:Router) {
     this.user = new UserLogin();
   }
 
@@ -25,20 +25,21 @@ export class LoginComponent implements OnInit {
     this.onLogin=true;
     this.succesfulLogin=false;
     this.errorOnLogin=false;
-    this.loginService.loginMyUser(this.user).subscribe(response=>{
+    this.userService.loginMyUser(this.user).subscribe(response=>{
 
             localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
             this.succesfulLogin=true;
             this.router.navigate(['home']);
+            console.log(response.body);
           },error=>{
-            console.log(error);
+          //  console.log(error);
             this.succesfulLogin=false;
             this.onLogin=false;
             this.errorOnLogin=true;
           });
   }
   isAuthenticated():boolean{
-    return this.isAuthenticatedService.isAuthenticated();
+    return this.userService.isAuthenticated();
   }
 
 

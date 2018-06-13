@@ -19,9 +19,7 @@ import { ProjectComponent } from './modules/projects/project/project.component';
 import { MeComponent } from './modules/user/me/me.component';
 /*Services import*/
 import { ProjectsService } from './services/projects/projects.service';
-import { SignupService } from './services/user/signUp/signup.service';
-import { LoginService } from './services/user/login/login.service';
-import { IsAuthenticatedService } from './services/user/authenticated/authenticated';
+import {UserService} from './services/user/user.service';
 /*Graficos*/
 import {ChartsModule} from 'ng2-charts';
 
@@ -47,9 +45,7 @@ import {ChartsModule} from 'ng2-charts';
   ],
   providers: [
     ProjectsService,
-    SignupService,
-    LoginService,
-    IsAuthenticatedService
+    UserService
   ],
   bootstrap: [AppComponent]
 })
