@@ -8,19 +8,21 @@ import { ProjectsService } from '../../services/projects/projects.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-
+  totalProjects:number = 0;
   errorStatus404:boolean=false;
-  projects:Project[];
+  projects:Project[]=[];
   constructor(private projectsService:ProjectsService) {
-    this.getAllprojects();
+    this.getAllProjects();
   }
 
   ngOnInit() {
 
   }
-  getAllprojects(){
-    this.projectsService.getAllprojects().subscribe( response =>{
-      this.projects = response;
+  getAllProjects(){
+    this.projectsService.getAllprojects(this.totalProjects).subscribe( response =>{
+      let resp:Project[]=response;
+      this.projects = this.projects.concat(resp);
+      this.totalProjects += 20;
     }, error =>{
       if (error.status == 404 ){
         this.errorStatus404=true;

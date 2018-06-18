@@ -1,8 +1,22 @@
 <div class="container contentSpacing">
   <div class="row" *ngIf="isAuthenticated()">
       <div class="col-md-2">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <th scope="row"></th>
+              <td (click)="showUser()">My Profile</td>
+            </tr>
+            <tr>
+              <th scope="row"></th>
+              <td (click)="showMyVotes()">My Votes</td>
+
+            </tr>
+
+          </tbody>
+        </table>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-10" *ngIf="showUserData">
        <a  class="list-group-item list-group-item-action flex-column align-items-start">
         <h4 class="text-center">Your Profile</h4>
         <hr>
@@ -17,10 +31,8 @@
 
       </a>
       </div>
-      <div class="col-md-2">
-      </div>
-    <div class="row my-5">
-    <div class="col-md-12">
+
+    <div class="col-md-10" *ngIf="showVotes">
 
       <!--Show user Votes -->
         <div class="row " *ngIf="myProjects!=null && isAuthenticated()">
@@ -66,7 +78,7 @@
         </div>
       <!--End user Votes -->
     </div>
-  </div>
+
   </div>
 
   <div class="row my-5" *ngIf="!isAuthenticated()">

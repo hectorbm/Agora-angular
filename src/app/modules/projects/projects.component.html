@@ -4,44 +4,57 @@
 
     </div>
   </div>
-<div class="contentSpacing" *ngFor="let project of projects">
-  <div class="row"  >
-    <div class="col-md-10">
-      <div class="list-group">
-        <a  class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <small>{{project.publishedAt}}</small>
-          </div>
-          <small>Project Description:</small>
-          <p class="mb-1">{{project.extract}}</p>
-          <div class="row">
-            <div class="col-md-4">
-              <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
-              <br>
-              <small>CaseFile: {{project.caseFile}}</small>
-              <br>
+<div class="contentSpacing" *ngIf="projects.length>0">
+  <div *ngFor="let project of projects">
+    <div class="row"  >
+      <div class="col-md-10">
+        <div class="list-group">
+          <a  class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <small>{{project.publishedAt}}</small>
             </div>
-            <div class="col-md-4">
-              <small>Votos:</small>
-              <br>
-              <small>Favor: {{project.favor}}</small>
-              <br>
-              <small>Against: {{project.against}}</small>
+            <small>Project Description:</small>
+            <p class="mb-1">{{project.extract}}</p>
+            <div class="row">
+              <div class="col-md-4">
+                <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
+                <br>
+                <small>CaseFile: {{project.caseFile}}</small>
+                <br>
+              </div>
+              <div class="col-md-4">
+                <small>Votos:</small>
+                <br>
+                <small>Favor: {{project.favor}}</small>
+                <br>
+                <small>Against: {{project.against}}</small>
+              </div>
+              <div class="col-md-4">
+                <br>
+
+                <small>StartedAt: {{project.startedAt}}</small>
+              </div>
             </div>
-            <div class="col-md-4">
-              <br>
-
-              <small>StartedAt: {{project.startedAt}}</small>
-            </div>
-          </div>
 
 
-        </a>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-2">
+
+            <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-primary btn-block">Vote</button>
+
       </div>
     </div>
-    <div class="col-md-2">
+  </div>
+  <div class="row">
+    <div class="col-md-4">
 
-          <button type="button" [routerLink]="['/project',project._id]" class="btn my-1 btn-outline-primary btn-block">Vote</button>
+    </div>
+    <div class="col-md-4">
+      <button type="button" class="btn my-1 btn-primary " name="button" (click)="getAllProjects()">Show More Projects</button>
+    </div>
+    <div class="col-md-4">
 
     </div>
   </div>

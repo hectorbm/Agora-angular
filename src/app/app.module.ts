@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 /*Routes*/
-import { APP_ROUTING } from "./app.routes";
+import { APP_ROUTING } from './app.routes';
 
 /*Components import*/
 import { AppComponent } from './app.component';

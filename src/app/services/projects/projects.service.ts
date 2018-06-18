@@ -22,11 +22,23 @@ export class ProjectsService {
                     .get<Project>(this.projectsUrl + "/" + id);
   }
   //Get all the projects() returns an observable!
-  getAllprojects():Observable<Project[]>{
+/*  getAllprojects():Observable<Project[]>{
 
     return this.http
                     .get<Project[]>(this.projectsUrl);
   }
+
+*/
+  getAllprojects(total:number):Observable<Project[]>{
+  let num:string = total.toString();
+  return this.http
+                  .get<Project[]>(this.projectsUrl,{
+                    params:{
+                      ["total"]: num
+                    }
+                  });
+}
+
 //Just vote favor or against!
   vote(projectId:string,vote:string){
     if (this.userService.isAuthenticated() && (vote==='favor' || vote==='against')){

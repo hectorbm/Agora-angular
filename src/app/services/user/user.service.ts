@@ -11,31 +11,26 @@ export class UserService {
   readonly signUpUrl = "https://glacial-refuge-10252.herokuapp.com/users";
   readonly logoutUrl="https://glacial-refuge-10252.herokuapp.com/users/me/token";
   readonly getVotesUrl = "https://glacial-refuge-10252.herokuapp.com/users/me/myVotes";
+  headersWithoutToken = new HttpHeaders({
+  'Content-Type': 'application/json'
+  });
 
   constructor(private http:HttpClient) { }
 
   loginMyUser(user:UserLogin):Observable<HttpResponse<Object>> {
-        let headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-        return this.http.post<HttpResponse<Object>>(this.loginUrl,user,{ headers, observe:'response' });
+    let headers = this.headersWithoutToken;
+    return this.http.post<HttpResponse<Object>>(this.loginUrl,user,{ headers, observe:'response' });
   }
 
   signUpUser(user:UserSignUp):Observable<HttpResponse<Object>>{
-    //set headers
-    let headers = new Headers({
-    'Content-Type': 'application/json'
-  });
-
-  return this.http.post<HttpResponse<Object>>(this.signUpUrl,user,{observe:'response'});
+    let headers = this.headersWithoutToken;
+    return this.http.post<HttpResponse<Object>>(this.signUpUrl,user,{observe:'response'});
   }
 
   isAuthenticated():boolean{
-    if (localStorage.getItem("X-Auth-token")!=null){
-      return true;
-    }
-      return false;
+    return localStorage.getItem("X-Auth-token")!=null ;
   }
+
   logoutMyUser(){
     if (this.isAuthenticated()){
       //set headers
@@ -48,15 +43,17 @@ export class UserService {
     localStorage.removeItem('X-Auth-token');
   }
  }
+
  getMyVotes():Observable<HttpResponse<Project[]>>{
    if(this.isAuthenticated){
      let headers = new HttpHeaders({
      'Content-Type': 'application/json',
      'X-Auth': localStorage.getItem('X-Auth-token')
      });
+
      return this.http.get<HttpResponse<Project[]>>(this.getVotesUrl,{headers});
    }
-   else
+
     return null;
  }
 
