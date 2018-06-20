@@ -8,10 +8,11 @@ import { ProjectsService } from '../../services/projects/projects.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  totalProjects:number = 0;
+  totalProjects:number;
   errorStatus404:boolean=false;
   projects:Project[]=[];
   constructor(private projectsService:ProjectsService) {
+    this.totalProjects = 0;
     this.getAllProjects();
   }
 
@@ -19,7 +20,7 @@ export class ProjectsComponent implements OnInit {
 
   }
   getAllProjects(){
-    this.projectsService.getAllprojects(this.totalProjects).subscribe( response =>{
+    this.projectsService.getAllprojects(this.totalProjects,20).subscribe( response =>{
       let resp:Project[]=response;
       this.projects = this.projects.concat(resp);
       this.totalProjects += 20;

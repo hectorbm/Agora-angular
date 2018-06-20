@@ -28,6 +28,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.getProject(this.id);
+    console.log(this.project);
   }
 
   getProject(id:string){

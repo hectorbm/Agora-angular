@@ -21,22 +21,10 @@ export class ProjectsService {
     return this.http
                     .get<Project>(this.projectsUrl + "/" + id);
   }
-  //Get all the projects() returns an observable!
-/*  getAllprojects():Observable<Project[]>{
 
-    return this.http
-                    .get<Project[]>(this.projectsUrl);
-  }
-
-*/
-  getAllprojects(total:number):Observable<Project[]>{
-  let num:string = total.toString();
-  return this.http
-                  .get<Project[]>(this.projectsUrl,{
-                    params:{
-                      ["total"]: num
-                    }
-                  });
+  getAllprojects(total:number,limit:number):Observable<Project[]>{
+  let url:string = this.projectsUrl + "/" + total + "/" + limit;
+  return this.http.get<Project[]>(url);
 }
 
 //Just vote favor or against!
