@@ -1,48 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {UserData} from '../../DataInterfaces/user.interface';
 import{Project} from '../../DataInterfaces/project.interface'
-import {Router} from '@angular/router';
 import {UserService} from '../../../services/user/user.service';
+import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.css']
 })
-export class MeComponent implements OnInit {
+export class MeComponent {
 
-  showUserData:boolean = true;
-  showVotes:boolean = false;
-  user:UserData={lastName :"buena maizon",email:"hectorbuenamaizon@gmail.com",firstName:"hector",middleName:"gabriel",idNumber:39286107};
+  userOption:string;
+  userService:UserService;
+  user:UserData;
   myProjects:any;
-  constructor(private router:Router,private userService:UserService) {
-    this.toMyVotes();
 
-  }
-
-  ngOnInit() {
+  constructor(private http:HttpClient) {
+    this.userService = UserService.getInstance(this.http);
+    if (this.userService.isAuthenticated()){
+      this.user = this.userService.getUserProfile();
+      this.getMyVotes();
+    }
   }
 
   isAuthenticated():boolean{
-
-    return true;
+    return this.userService.isAuthenticated();
   }
 
-  showMyVotes(){
-    this.showVotes = true;
-    this.showUserData = false;
-  }
-  showUser(){
-    this.showVotes = false;
-    this.showUserData = true;
+  setOption(opt:string){
+    this.userOption = opt;
   }
 
-  toMyVotes(){
+  getMyVotes(){
     this.userService.getMyVotes().subscribe(response=>{
-
       this.myProjects = response;
-
     },error=>{
-      console.log(error);
+      console.log("error");
     });
   }
 

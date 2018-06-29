@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLogin } from '../../DataInterfaces/user.interface';
+import { UserLogin, UserData } from '../../DataInterfaces/user.interface';
 import { UserService} from '../../../services/user/user.service';
 import {Router} from '@angular/router';
-
+import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,8 +14,10 @@ export class LoginComponent implements OnInit {
   errorOnLogin: boolean=false;
   succesfulLogin:boolean=false;
   onLogin:boolean=false;
-  constructor(private userService:UserService,private router:Router) {
+  userService:UserService;
+  constructor(private router:Router,private http:HttpClient) {
     this.user = new UserLogin();
+    this.userService = UserService.getInstance(this.http);
   }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("X-Auth-token",response.headers.get('X-Auth'));
             this.succesfulLogin=true;
             this.router.navigate(['home']);
-            console.log(response.body);
+            this.userService.setUserProfile(<UserData>response.body);
           },error=>{
           //  console.log(error);
             this.succesfulLogin=false;

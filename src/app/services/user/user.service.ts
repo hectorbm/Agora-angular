@@ -1,36 +1,54 @@
 import { Injectable } from '@angular/core';
-import { UserLogin,UserSignUp } from '../../modules/DataInterfaces/user.interface';
-import {Project} from '../../modules/DataInterfaces/project.interface';
-import { HttpHeaders, HttpClient, HttpResponse} from '@angular/common/http';
+import { HttpHeaders,HttpResponse, HttpClient} from '@angular/common/http';
+import { UserLogin, UserSignUp,UserData} from '../../modules/DataInterfaces/user.interface';
 import { Observable } from 'rxjs/Observable';
+import { Project } from '../../modules/DataInterfaces/project.interface';
 
 @Injectable()
-export class UserService {
 
-  readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
-  readonly signUpUrl = "https://glacial-refuge-10252.herokuapp.com/users";
-  readonly logoutUrl="https://glacial-refuge-10252.herokuapp.com/users/me/token";
-  readonly getVotesUrl = "https://glacial-refuge-10252.herokuapp.com/users/me/myVotes";
-  headersWithoutToken = new HttpHeaders({
+export class UserService {
+  private readonly loginUrl = "https://glacial-refuge-10252.herokuapp.com/users/login";
+  private readonly signUpUrl = "https://glacial-refuge-10252.herokuapp.com/users";
+  private readonly logoutUrl="https://glacial-refuge-10252.herokuapp.com/users/me/token";
+  private readonly getVotesUrl = "https://glacial-refuge-10252.herokuapp.com/users/me/myVotes";
+  private userProfile:UserData;
+  private headersWithoutToken = new HttpHeaders({
   'Content-Type': 'application/json'
   });
+  private http:HttpClient;
+  private static instance:UserService;
 
-  constructor(private http:HttpClient) { }
-
+  private constructor (httpClient:HttpClient){
+    this.http = httpClient;
+  }
+// Get instance
+  public static getInstance(http:HttpClient):UserService{
+    if (UserService.instance == null){
+      UserService.instance = new UserService (http);
+    }
+    return UserService.instance;
+}
+  getUserProfile():UserData{
+    return this.userProfile;
+  }
+  setUserProfile(user:UserData){
+    this.userProfile = user;
+  }
+//Login user
   loginMyUser(user:UserLogin):Observable<HttpResponse<Object>> {
     let headers = this.headersWithoutToken;
     return this.http.post<HttpResponse<Object>>(this.loginUrl,user,{ headers, observe:'response' });
   }
-
+//Sign up
   signUpUser(user:UserSignUp):Observable<HttpResponse<Object>>{
     let headers = this.headersWithoutToken;
     return this.http.post<HttpResponse<Object>>(this.signUpUrl,user,{observe:'response'});
   }
-
+//Chech Authentication
   isAuthenticated():boolean{
     return localStorage.getItem("X-Auth-token")!=null ;
   }
-
+//Log out
   logoutMyUser(){
     if (this.isAuthenticated()){
       //set headers
@@ -43,9 +61,9 @@ export class UserService {
     localStorage.removeItem('X-Auth-token');
   }
  }
-
+//Get Votes
  getMyVotes():Observable<HttpResponse<Project[]>>{
-   if(this.isAuthenticated){
+   if(this.isAuthenticated()){
      let headers = new HttpHeaders({
      'Content-Type': 'application/json',
      'X-Auth': localStorage.getItem('X-Auth-token')
@@ -53,8 +71,6 @@ export class UserService {
 
      return this.http.get<HttpResponse<Project[]>>(this.getVotesUrl,{headers});
    }
-
     return null;
  }
-
 }

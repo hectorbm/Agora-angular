@@ -12,8 +12,9 @@ import {UserService}  from '../../services/user/user.service';
 export class ProjectsService {
 
   readonly projectsUrl ='https://glacial-refuge-10252.herokuapp.com/projects';
-
-  constructor(private http:HttpClient,private userService:UserService) {
+  userService:UserService;
+  constructor(private http:HttpClient) {
+    this.userService = UserService.getInstance(this.http);
   }
 
 //Get project by Id(id:String) returns an observable!

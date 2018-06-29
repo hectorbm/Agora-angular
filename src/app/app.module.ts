@@ -22,6 +22,8 @@ import { ProjectsService } from './services/projects/projects.service';
 import {UserService} from './services/user/user.service';
 /*Graficos*/
 import {ChartsModule} from 'ng2-charts';
+import { TagsComponent } from './modules/user/tags/tags.component';
+
 
 
 
@@ -34,7 +36,8 @@ import {ChartsModule} from 'ng2-charts';
     HomeComponent,
     ProjectsComponent,
     ProjectComponent,
-    MeComponent
+    MeComponent,
+    TagsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +47,7 @@ import {ChartsModule} from 'ng2-charts';
     ChartsModule
   ],
   providers: [
-    ProjectsService,
-    UserService
+    ProjectsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,82 +1,92 @@
 <div class="container contentSpacing">
-  <div class="row" *ngIf="isAuthenticated()">
-      <div class="col-md-2">
-        <table class="table table-hover">
-          <tbody>
-            <tr>
-              <th scope="row"></th>
-              <td (click)="showUser()">My Profile</td>
-            </tr>
-            <tr>
-              <th scope="row"></th>
-              <td (click)="showMyVotes()">My Votes</td>
+  <div *ngIf="isAuthenticated()">
+      <div class="row" >
+        <div class="col-md-2">
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th scope="row"></th>
+                <td (click)="setOption('me')">My Profile</td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td (click)="setOption('myVotes')">My Votes</td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td (click)="setOption('myTags')">My Tags</td>
+              </tr>
 
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-10" *ngIf="showUserData">
-       <a  class="list-group-item list-group-item-action flex-column align-items-start">
-        <h4 class="text-center">Your Profile</h4>
-        <hr>
-        <br>
-        <ul>
-          <li><p>Name:  {{user.firstName}}</p></li>
-          <li><p>Middle Name:  {{user.middleName}}</p></li>
-          <li><p>Last Name:  {{user.lastName}}</p></li>
-          <li><p>Email:  {{user.email}}</p></li>
-          <li><p>Id:  {{user.idNumber}}</p></li>
-        </ul>
-
-      </a>
-      </div>
-
-    <div class="col-md-10" *ngIf="showVotes">
-
-      <!--Show user Votes -->
-        <div class="row " *ngIf="myProjects!=null && isAuthenticated()">
-          <div class="col-md-12">
-            <a  class="list-group-item list-group-item-action flex-column align-items-start">
-            <h4>My Votes</h4>
+            </tbody>
+          </table>
+        </div>
+      <div class="col-md-10"  [ngSwitch]="userOption">
+    <!--Show user Data-->
+        <div *ngSwitchDefault>
+           <a  class="list-group-item list-group-item-action flex-column align-items-start">
+            <h4 class="text-center">Your Profile</h4>
+            <hr>
+            <br>
+            <ul>
+              <li><p>Name:  {{user.firstName}}</p></li>
+              <li><p>Middle Name:  {{user.middleName}}</p></li>
+              <li><p>Last Name:  {{user.lastName}}</p></li>
+              <li><p>Email:  {{user.email}}</p></li>
+              <li><p>Id:  {{user.idNumber}}</p></li>
+            </ul>
 
           </a>
-          </div>
-          <div class="col-md-12" *ngFor="let project of myProjects">
-              <div class="list-group my-2">
-                <a  class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div class="d-flex w-100 justify-content-between">
-                    <small>{{project.publishedAt}}</small>
-                  </div>
-                  <small>Project Description:</small>
-                  <p class="mb-1">{{project.extract}}</p>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
-                      <br>
-                      <small>CaseFile: {{project.caseFile}}</small>
-                      <br>
-                    </div>
-                    <div class="col-md-4">
-                      <small>Votos:</small>
-                      <br>
-                      <small>Favor: {{project.favor}}</small>
-                      <br>
-                      <small>Against: {{project.against}}</small>
-                    </div>
-                    <div class="col-md-4">
-                      <br>
+        </div>
+    <!--Show user Votes -->
 
-                      <small>StartedAt: {{project.startedAt}}</small>
+        <div *ngSwitchCase="'myVotes'">
+          <div class="row " *ngIf="myProjects!=null && isAuthenticated()">
+            <div class="col-md-12">
+              <a  class="list-group-item list-group-item-action flex-column align-items-start">
+              <h4>My Votes</h4>
+
+            </a>
+            </div>
+            <div class="col-md-12" *ngFor="let project of myProjects">
+                <div class="list-group my-2">
+                  <a  class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <small>{{project.publishedAt}}</small>
                     </div>
-                  </div>
+                    <small>Project Description:</small>
+                    <p class="mb-1">{{project.extract}}</p>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <small>Fecha: {{project.day }}/{{project.month }}/{{project.year }}</small>
+                        <br>
+                        <small>CaseFile: {{project.caseFile}}</small>
+                        <br>
+                      </div>
+                      <div class="col-md-4">
+                        <small>Votos:</small>
+                        <br>
+                        <small>Favor: {{project.favor}}</small>
+                        <br>
+                        <small>Against: {{project.against}}</small>
+                      </div>
+                      <div class="col-md-4">
+                        <br>
+
+                        <small>StartedAt: {{project.startedAt}}</small>
+                      </div>
+                    </div>
 
 
-                </a>
-              </div>
+                  </a>
+                </div>
+            </div>
           </div>
         </div>
-      <!--End user Votes -->
+      <!--Show user Tags -->
+        <div *ngSwitchCase="'myTags'">
+          <p>My Tags</p>
+        </div>
+    </div>
     </div>
 
   </div>
